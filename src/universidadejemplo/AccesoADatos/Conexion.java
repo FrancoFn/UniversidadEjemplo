@@ -26,7 +26,7 @@ public class Conexion {
             }catch (ClassNotFoundException ex){
                 JOptionPane.showMessageDialog(null,"Error al cargar los driver");
             } catch (SQLException ex) {
-                Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null,"Error al conectarse");
             }
         }return connection;
     }
