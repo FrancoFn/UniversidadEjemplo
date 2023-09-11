@@ -23,7 +23,7 @@ public class AlumnoData {
 
     public void guardarAlumnoX(Alumno alumno) {
         String sql = "INSERT INTO alumno (dni,apellido,nombre,fechaNacimiento"
-                + "estado) VALUES (?,?,?,?,?)";
+                + ",estado) VALUES (?,?,?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, alumno.getDni());
@@ -110,15 +110,14 @@ public class AlumnoData {
     }
 
     public Alumno buscarAlumnoPorDni(int dni) {
-        String sql = "SELECT idAlumno, dni, apellido, nombre, fechaNacimiento"
-                + " from alumno Where dni =? and estado= 1";
+        String sql = "SELECT idAlumno, dni, apellido, nombre, fechaNacimiento from alumno Where dni = ? and estado= 1";
         Alumno alumno = null;
         try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, dni);
+            PreparedStatement ps = con.prepareStatement(sql);           
+            ps.setInt(1,dni);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                alumno = new Alumno();
+                alumno = new Alumno();               
                 alumno.setIdAlumno(rs.getInt("idAlumno"));
                 alumno.setDni(rs.getInt("dni"));
                 alumno.setApellido(rs.getString("apellido"));
@@ -134,7 +133,6 @@ public class AlumnoData {
             Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE, null, ex);
         }
         return alumno;
-
     }
 
     public List<Alumno> listarAlumnos() {

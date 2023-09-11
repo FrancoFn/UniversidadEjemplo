@@ -161,18 +161,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 650, Short.MAX_VALUE)
+            .addGap(0, 720, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 460, Short.MAX_VALUE)
+            .addGap(0, 580, Short.MAX_VALUE)
         );
 
-        getContentPane().add(escritorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 460));
+        getContentPane().add(escritorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 580));
 
         jMenu1.setText("Alumno");
 
         jmFomAlumno.setText("Formulario de Alumno");
+        jmFomAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmFomAlumnoActionPerformed(evt);
+            }
+        });
         jMenu1.add(jmFomAlumno);
 
         jMenuBar1.add(jMenu1);
@@ -221,6 +226,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jmAporMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmAporMateriaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jmAporMateriaActionPerformed
+
+    private void jmFomAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmFomAlumnoActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        GestionDeAlumnos gesAlumnos = new GestionDeAlumnos();
+        gesAlumnos.setVisible(true);
+        escritorio.add(gesAlumnos);
+        escritorio.moveToFront(gesAlumnos);
+    }//GEN-LAST:event_jmFomAlumnoActionPerformed
 
     /**
      * @param args the command line arguments
