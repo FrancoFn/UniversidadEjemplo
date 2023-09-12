@@ -1,17 +1,23 @@
 
 package universidadejemplo.Vistas;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
+import universidadejemplo.AccesoADatos.MateriaData;
 import universidadejemplo.Entidades.Materia;
 
 
 public class consultaDeAlumnosPorMateria extends javax.swing.JInternalFrame {
     private DefaultTableModel modelo = new DefaultTableModel();
+    MateriaData mData = new MateriaData();
+   DefaultComboBoxModel model = new DefaultComboBoxModel();
+
     
     public consultaDeAlumnosPorMateria() {
         initComponents();
-        cargarCombo();
-        armarCabecera();
+        listarMateria();
     }
 
     /**
@@ -81,24 +87,24 @@ public class consultaDeAlumnosPorMateria extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 346, Short.MAX_VALUE)
+                .addComponent(JBSalir)
+                .addGap(37, 37, 37))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(JCmate, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(JCmate, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(54, 54, 54)
-                        .addComponent(jLabel2)))
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(JBSalir)
-                        .addGap(37, 37, 37))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,7 +116,7 @@ public class consultaDeAlumnosPorMateria extends javax.swing.JInternalFrame {
                     .addComponent(JCmate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
                 .addComponent(JBSalir)
                 .addGap(29, 29, 29))
         );
@@ -140,28 +146,24 @@ public class consultaDeAlumnosPorMateria extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
-private void cargarCombo(){
-JCmate.addItem("matemática");
-JCmate.addItem("Lengua y literatura");
-JCmate.addItem("Gimnasia");
-JCmate.addItem("Inglés");
-JCmate.addItem("Geografía");
-JCmate.addItem("Historia");
-JCmate.addItem("Biología");
-JCmate.addItem("físico química");
-JCmate.addItem("Formación ética");
-JCmate.addItem("Música");
-JCmate.addItem("Informática");
-JCmate.addItem("plástica");
 
+public void listarMateria(){
+ List <Materia> lista=  mData.listarMaterias();
+    
+  for (Materia materia : lista) {
+          model.addElement(materia);
+        }
+    JCmate.setModel(model);  
 }
 
-private void armarCabecera(){
+/*private void armarCabecera(){
 modelo.addColumn("ID");
 modelo.addColumn("DNI");
 modelo.addColumn("Apellido");
 modelo.addColumn("Nombre");
 JTMater.setModel(modelo);
-}
+}*/
+
+    
 
 }
