@@ -194,6 +194,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu4.setText("Administracion");
 
         jmInscripciones.setText("Manejo de Inscripciones");
+        jmInscripciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmInscripcionesActionPerformed(evt);
+            }
+        });
         jMenu4.add(jmInscripciones);
 
         jmNotas.setText("Manipulacion de notas");
@@ -242,6 +247,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         escritorio.add(gesAlumnos);
         escritorio.moveToFront(gesAlumnos);
     }//GEN-LAST:event_jmFomAlumnoActionPerformed
+
+    private void jmInscripcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmInscripcionesActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        formularioDeInscripcion forinscripcion = new formularioDeInscripcion();
+        forinscripcion.setVisible(true);
+        escritorio.add(forinscripcion);
+        escritorio.moveToFront(forinscripcion);
+    }//GEN-LAST:event_jmInscripcionesActionPerformed
 
     /**
      * @param args the command line arguments
