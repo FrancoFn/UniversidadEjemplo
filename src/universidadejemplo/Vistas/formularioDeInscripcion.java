@@ -5,15 +5,18 @@
  */
 package universidadejemplo.Vistas;
 
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import universidadejemplo.AccesoADatos.AlumnoData;
+import universidadejemplo.Entidades.Alumno;
+
 /**
  *
- * @author sebastian
+ * @author Luz
  */
 public class formularioDeInscripcion extends javax.swing.JInternalFrame {
-
-    /**
-     * Creates new form formularioDeInscripcion
-     */
+  AlumnoData alumData = new AlumnoData();
+    DefaultComboBoxModel modelo = new DefaultComboBoxModel();
     public formularioDeInscripcion() {
         initComponents();
     }
@@ -67,6 +70,11 @@ public class formularioDeInscripcion extends javax.swing.JInternalFrame {
         jLabel2.setText("Seleccione Un Alumno:");
 
         JCBAlum.setToolTipText("");
+        JCBAlum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JCBAlumActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setText("Listado de materias:");
@@ -176,6 +184,10 @@ public class formularioDeInscripcion extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_JBSalirActionPerformed
 
+    private void JCBAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBAlumActionPerformed
+        
+    }//GEN-LAST:event_JCBAlumActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBAnularinscrip;
@@ -193,4 +205,13 @@ public class formularioDeInscripcion extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+public void listarAlumno(){
+List <Alumno> alum = alumData.listarAlumnos();
+
+for (Alumno alumno :alum) {
+          modelo.addElement(alumno);
+        }
+   JCBAlum.setModel(modelo);
+}
+
 }
