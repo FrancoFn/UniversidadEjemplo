@@ -58,6 +58,7 @@ public class formularioDeInscripcion extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTable1);
 
         setBackground(new java.awt.Color(0, 153, 153));
+        setClosable(true);
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Formulario De Inscripcion");
