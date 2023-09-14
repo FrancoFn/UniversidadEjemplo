@@ -10,6 +10,7 @@ package universidadejemplo.Entidades;
  * @author luz
  */
 public class Materia {
+
     private int idMateria;
     private String nombre;
     private int anioMateria;
@@ -65,7 +66,7 @@ public class Materia {
 
     @Override
     public String toString() {
-        return nombre + " " + anioMateria + ", " + idMateria ;
- 
-}
+        return nombre + " " + anioMateria + ", " + idMateria;
+
+    }
 }

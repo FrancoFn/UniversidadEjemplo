@@ -8,6 +8,7 @@ package universidadejemplo.Vistas;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import universidadejemplo.AccesoADatos.AlumnoData;
+import universidadejemplo.AccesoADatos.InscripcionData;
 import universidadejemplo.Entidades.Alumno;
 
 /**
@@ -16,7 +17,9 @@ import universidadejemplo.Entidades.Alumno;
  */
 public class formularioDeInscripcion extends javax.swing.JInternalFrame {
   AlumnoData alumData = new AlumnoData();
+  InscripcionData insData=new InscripcionData();
     DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+    List <Alumno> alum; 
     public formularioDeInscripcion() {
         initComponents();
     }
@@ -145,7 +148,7 @@ public class formularioDeInscripcion extends javax.swing.JInternalFrame {
                         .addComponent(JBInscribir)
                         .addGap(39, 39, 39)
                         .addComponent(JBAnularinscrip)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
                         .addComponent(JBSalir)))
                 .addGap(31, 31, 31))
         );
@@ -165,7 +168,7 @@ public class formularioDeInscripcion extends javax.swing.JInternalFrame {
                     .addComponent(JRBMatenoinscrip))
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JBAnularinscrip)
                     .addComponent(JBSalir)
@@ -206,12 +209,24 @@ public class formularioDeInscripcion extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 public void listarAlumno(){
-List <Alumno> alum = alumData.listarAlumnos();
+alum = alumData.listarAlumnos();
 
 for (Alumno alumno :alum) {
           modelo.addElement(alumno);
         }
    JCBAlum.setModel(modelo);
 }
+public void tablaAlumno(){
+    
+    
+    
+}
+public void guardarInscripcion(){
+    
+    
+    
+}
+
+
 
 }
