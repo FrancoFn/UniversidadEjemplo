@@ -187,6 +187,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu2.setText("Materia");
 
         jmFormMateria.setText("Formulario de Materia");
+        jmFormMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmFormMateriaActionPerformed(evt);
+            }
+        });
         jMenu2.add(jmFormMateria);
 
         jMenuBar1.add(jMenu2);
@@ -231,7 +236,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmAporMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmAporMateriaActionPerformed
-         escritorio.removeAll();
+        escritorio.removeAll();
         escritorio.repaint();
         consultaDeAlumnosPorMateria alumpormate = new consultaDeAlumnosPorMateria();
         alumpormate.setVisible(true);
@@ -256,6 +261,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         escritorio.add(forinscripcion);
         escritorio.moveToFront(forinscripcion);
     }//GEN-LAST:event_jmInscripcionesActionPerformed
+
+    private void jmFormMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmFormMateriaActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        GestionDeMaterias gestionMateria = new GestionDeMaterias();
+        gestionMateria.setVisible(true);
+        escritorio.add(gestionMateria);
+        escritorio.moveToFront(jMenu1);
+    }//GEN-LAST:event_jmFormMateriaActionPerformed
 
     /**
      * @param args the command line arguments
