@@ -378,13 +378,13 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     public void eliminarAlumnos() {
         alumno.getIdAlumno();
         adata.eliminarX(alumno.getIdAlumno());
-        
+
     }
 
     public void guardarAlumnos() {
         getFecha();
         DateTimeFormatter format = new DateTimeFormatterBuilder().append(DateTimeFormatter.ofPattern("yyyy-MMM-dd")).toFormatter();
-        LocalDate fecha = LocalDate.parse(fechaString,format);
+        LocalDate fecha = LocalDate.parse(fechaString, format);
         Alumno alumno = new Alumno(Integer.parseInt(jtDoc.getText()), jtApe.getText(),
                 jtNom.getText(), fecha, jrActivo.isSelected());
         adata.guardarAlumnoX(alumno);
