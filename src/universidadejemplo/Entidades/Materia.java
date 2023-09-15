@@ -15,6 +15,7 @@ public class Materia {
     private String nombre;
     private int anioMateria;
     private boolean activo;
+    private double nota;
 
     public Materia() {
     }
@@ -62,6 +63,14 @@ public class Materia {
 
     public void setActivo(boolean activo) {
         this.activo = activo;
+    }
+
+    public double getNota() {
+        return nota;
+    }
+
+    public void setNota(double nota) {
+        this.nota = nota;
     }
 
     @Override

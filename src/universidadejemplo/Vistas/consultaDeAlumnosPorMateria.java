@@ -149,7 +149,7 @@ public class consultaDeAlumnosPorMateria extends javax.swing.JInternalFrame {
         JCmate.setModel(model);
     }
 
-    
+  
     
     
     

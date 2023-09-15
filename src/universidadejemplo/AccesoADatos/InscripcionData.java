@@ -104,19 +104,20 @@ public class InscripcionData {
 
     public List<Materia> obtenerMateriasCursadas(int id) {
         ArrayList<Materia> materias = new ArrayList<>();
-        String sql = "Select inscripto.idMateria,nombre,año from inscpto,"
-                + "materia where inscripto.idMateria = materia.idMateria"
-                + "and inscripto.idAlumno=?";
-
+        String sql = "SELECT I.idMateria,E.nombre,E.anio,I.nota FROM "
+                + "materia E join inscripto I WHERE (I.idMateria = E.idMateria)"
+                + "and (I.idAlumno = ?)";
+        Materia materia=null;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Materia materia = new Materia();
-                materia.setIdMateria(rs.getInt("idMateria"));
+                materia = new Materia();                
+                materia.setIdMateria(rs.getInt("idMateria"));              
                 materia.setNombre(rs.getString("nombre"));
-                materia.setAnioMateria(rs.getInt("anio"));
+                materia.setAnioMateria(rs.getInt("anio"));                
+                materia.setNota(rs.getDouble("nota"));
                 materias.add(materia);
             }
             ps.close();
@@ -205,4 +206,5 @@ public class InscripcionData {
         }
         return alumnosMateria;
     }
+   
 }

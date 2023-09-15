@@ -137,7 +137,7 @@ public class AlumnoData {
 
     public List<Alumno> listarAlumnos() {
         String sql = "SELECT idAlumno, dni, apellido, nombre, fechaNacimiento"
-                + " from alumno estado= 1";
+                + " FROM alumno WHERE estado= 1";
         ArrayList<Alumno> alumnos = new ArrayList<>();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -150,7 +150,7 @@ public class AlumnoData {
                 alumno.setNombre(rs.getString("nombre"));
                 alumno.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
                 alumno.setActivo(true);
-                listarAlumnos().add(alumno);
+                alumnos.add(alumno);
             }
             ps.close();
 
