@@ -206,5 +206,9 @@ public class InscripcionData {
         }
         return alumnosMateria;
     }
+
+    public List<Alumno> obtenerAlumnoXMateria() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
    
 }

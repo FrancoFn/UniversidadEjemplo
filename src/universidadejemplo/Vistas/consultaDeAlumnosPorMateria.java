@@ -4,18 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import universidadejemplo.AccesoADatos.InscripcionData;
 import universidadejemplo.AccesoADatos.MateriaData;
+import universidadejemplo.Entidades.Alumno;
 import universidadejemplo.Entidades.Materia;
 
 public class consultaDeAlumnosPorMateria extends javax.swing.JInternalFrame {
 
     private DefaultTableModel modelo = new DefaultTableModel();
     MateriaData mData = new MateriaData();
+    InscripcionData aData = new InscripcionData();
     DefaultComboBoxModel model = new DefaultComboBoxModel();
+   
 
     public consultaDeAlumnosPorMateria() {
         initComponents();
         listarMateria();
+        listaalumno();
     }
 
     @SuppressWarnings("unchecked")
@@ -30,6 +36,7 @@ public class consultaDeAlumnosPorMateria extends javax.swing.JInternalFrame {
         JBSalir = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 153, 102));
+        setClosable(true);
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Seleccione una materia:");
@@ -148,9 +155,15 @@ public class consultaDeAlumnosPorMateria extends javax.swing.JInternalFrame {
         }
         JCmate.setModel(model);
     }
-
+   public void listaalumno(){
+   List <Alumno> listaa= aData.obtenerAlumnoXMateria();
+   for(Alumno alumno : listaa ){
+      modelo.addRow(new Object[]{alumno.getIdAlumno(), ( alumno.getDni() + " " + alumno.getApellido()), alumno.getNombre()});
+   }
   
-    
+   }
+
+
     
     
     
