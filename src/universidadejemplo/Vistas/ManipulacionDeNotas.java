@@ -156,7 +156,7 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
                     .addComponent(jLabel5)
                     .addComponent(jlNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(jtNota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
@@ -233,7 +233,6 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
                 break;
             }
         }
-        System.out.println(idalum);
         listMat = insData.obtenerMateriasCursadas(idalum);
         for (Materia materia : listMat) {
             modelo.addRow(new Object[]{materia.getIdMateria(), (materia.getNombre() + " " + materia.getAnioMateria()), materia.getNota()});
