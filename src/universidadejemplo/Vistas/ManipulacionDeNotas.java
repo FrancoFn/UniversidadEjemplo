@@ -235,7 +235,6 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
                 break;
             }
         }
-        System.out.println(idalum);
         listMat = insData.obtenerMateriasCursadas(idalum);
         for (Materia materia : listMat) {
             modelo.addRow(new Object[]{materia.getIdMateria(), (materia.getNombre() + " " + materia.getAnioMateria()), materia.getNota()});
