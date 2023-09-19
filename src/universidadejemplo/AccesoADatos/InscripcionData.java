@@ -36,9 +36,9 @@ public class InscripcionData {
         String sql = "Insert into inscripto(nota,idAlumno,idMateria) values (?,?,?) ";
         try {
             PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, ins.getAlumno().getIdAlumno());
-            ps.setInt(2, ins.getMateria().getIdMateria());
-            ps.setDouble(3, ins.getNota());
+            ps.setDouble(1, ins.getNota());
+            ps.setInt(2, ins.getAlumno().getIdAlumno());
+            ps.setInt(3, ins.getMateria().getIdMateria());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -107,16 +107,16 @@ public class InscripcionData {
         String sql = "SELECT I.idMateria,E.nombre,E.anio,I.nota FROM "
                 + "materia E join inscripto I WHERE (I.idMateria = E.idMateria)"
                 + "and (I.idAlumno = ?)";
-        Materia materia=null;
+        Materia materia = null;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                materia = new Materia();                
-                materia.setIdMateria(rs.getInt("idMateria"));              
+                materia = new Materia();
+                materia.setIdMateria(rs.getInt("idMateria"));
                 materia.setNombre(rs.getString("nombre"));
-                materia.setAnioMateria(rs.getInt("anio"));                
+                materia.setAnioMateria(rs.getInt("anio"));
                 materia.setNota(rs.getDouble("nota"));
                 materias.add(materia);
             }
@@ -206,5 +206,5 @@ public class InscripcionData {
         }
         return alumnosMateria;
     }
-   
+
 }

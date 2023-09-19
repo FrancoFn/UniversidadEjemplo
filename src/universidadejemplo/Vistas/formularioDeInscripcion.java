@@ -7,6 +7,7 @@ package universidadejemplo.Vistas;
 
 import com.sun.corba.se.impl.ior.NewObjectKeyTemplateBase;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTable;
@@ -136,9 +137,15 @@ public class formularioDeInscripcion extends javax.swing.JInternalFrame {
                 return types [columnIndex];
             }
         });
+        JTInscripcion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JTInscripcionMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(JTInscripcion);
 
         JBInscribir.setText("Inscribir");
+        JBInscribir.setEnabled(false);
         JBInscribir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JBInscribirActionPerformed(evt);
@@ -146,6 +153,7 @@ public class formularioDeInscripcion extends javax.swing.JInternalFrame {
         });
 
         JBAnularinscrip.setText("Anular Inscripcion");
+        JBAnularinscrip.setEnabled(false);
         JBAnularinscrip.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JBAnularinscripActionPerformed(evt);
@@ -222,7 +230,7 @@ public class formularioDeInscripcion extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JBAnularinscripActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBAnularinscripActionPerformed
-        // TODO add your handling code here:
+        anularInscripcion();
     }//GEN-LAST:event_JBAnularinscripActionPerformed
 
     private void JBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBSalirActionPerformed
@@ -244,6 +252,7 @@ public class formularioDeInscripcion extends javax.swing.JInternalFrame {
         if (JRBMatenoinscrip.isSelected()) {
             JRBMateinscriptas.setSelected(false);
             cargarTablaAlumno();
+            JBAnularinscrip.setEnabled(false);
         } else {
             limpiarFilas();
 
@@ -264,6 +273,41 @@ public class formularioDeInscripcion extends javax.swing.JInternalFrame {
     private void JBInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBInscribirActionPerformed
         guardarInscripcion();
     }//GEN-LAST:event_JBInscribirActionPerformed
+
+    private void JTInscripcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTInscripcionMouseClicked
+        if (JRBMateinscriptas.isSelected()) {
+            int contador = 0;
+            int filas = modeloTabla.getRowCount();
+            for (int i = 0; i < filas; i++) {
+                if ((Boolean) modeloTabla.getValueAt(i, 3)) {
+                    JBAnularinscrip.setEnabled(true);
+                    contador++;
+                }
+                if (contador == 0) {
+                    JBAnularinscrip.setEnabled(false);
+                }
+
+            }
+        } else {
+            JBAnularinscrip.setEnabled(false);
+        }
+        if (JRBMatenoinscrip.isSelected()) {
+            int contador = 0;
+            int filas = modeloTabla.getRowCount();
+            for (int i = 0; i < filas; i++) {
+                if ((Boolean) modeloTabla.getValueAt(i, 3)) {
+                    JBInscribir.setEnabled(true);
+                    contador++;
+                }
+                if (contador == 0) {
+                    JBInscribir.setEnabled(false);
+                }
+
+            }
+        } else {
+            JBInscribir.setEnabled(false);
+        }
+    }//GEN-LAST:event_JTInscripcionMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -304,7 +348,7 @@ public void listarAlumno() {
 
     public void cargarTablaAlumno() {
         Alumno alu = (Alumno) JCBAlum.getSelectedItem();
-
+        limpiarFilas();
         if (JRBMatenoinscrip.isSelected()) {
             List<Materia> materias = insData.obtenerMateriasNoCursadas(alu.getIdAlumno());
             modeloTabla.setRowCount(0);
@@ -325,11 +369,11 @@ public void listarAlumno() {
     public void guardarInscripcion() {
         int filas = modeloTabla.getRowCount();
         Inscripcion ins = new Inscripcion();
-        Alumno alumn=(Alumno)JCBAlum.getSelectedItem();
+        Alumno alumn = (Alumno) JCBAlum.getSelectedItem();
         Materia materia;
         for (int i = 0; i < filas; i++) {
             if ((Boolean) (modeloTabla.getValueAt(i, 3))) {
-                materia=matData.buscarMateria((int)modeloTabla.getValueAt(i, 0));
+                materia = matData.buscarMateria((int) modeloTabla.getValueAt(i, 0));
                 System.out.println(alumn);
                 System.out.println(materia);
                 ins.setAlumno(alumn);
@@ -339,7 +383,34 @@ public void listarAlumno() {
                 System.out.println(ins);
             }
         }
+        cargarTablaAlumno();
 
     }
 
+    public void anularInscripcion() {
+        int filas = modeloTabla.getRowCount();
+        Alumno alu = (Alumno) JCBAlum.getSelectedItem();
+        List<Inscripcion> inscripciones = insData.obtenerInscripciones();
+        Iterator<Inscripcion> it = inscripciones.iterator();
+        while (it.hasNext()) {
+            for (Inscripcion inscripcion : inscripciones) {
+
+            }
+        }
+        List<Integer> idMaterias = new ArrayList<>();
+        for (int i = 0; i < modeloTabla.getRowCount(); i++) {
+
+            if ((Boolean) (modeloTabla.getValueAt(i, 3))) {
+                idMaterias.add((int) modeloTabla.getValueAt(i, 0));
+//                    int idmateria = (int) modeloTabla.getValueAt(i,0);
+//                    insData.borrarInscripcionMateriaAlumnos(alu.getIdAlumno(),idmateria );
+            }
+            for (Integer idMateria : idMaterias) {
+                insData.borrarInscripcionMateriaAlumnos(alu.getIdAlumno(), idMateria);
+            }
+            
+            System.out.println("inscripcion anulada");
+            cargarTablaAlumno();
+        }
+    }
 }
