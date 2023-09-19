@@ -140,7 +140,6 @@ public class Ingreso extends javax.swing.JInternalFrame {
             Acceso acceso = aData.loG(usuario, pass);
             nivel = acceso.getNivel();
             if (acceso.isAcceso()) {
-                System.out.println("bien");
                 JOptionPane.showMessageDialog(null, "Acceso concedido");
                 this.dispose();
 

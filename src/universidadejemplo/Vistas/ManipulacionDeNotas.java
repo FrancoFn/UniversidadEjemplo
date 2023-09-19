@@ -173,9 +173,10 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JCBAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBAlumActionPerformed
-
-        String query = JCBAlum.getSelectedItem().toString();
-        llenarTabla(query);
+ if (JCBAlum.getSelectedIndex() != 0) {
+           llenarTabla(); 
+        }
+        
     }//GEN-LAST:event_JCBAlumActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -219,27 +220,21 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
 
     public void comboBox() {
         this.listas = adata.listarAlumnos();
-        modeloo.addElement("");
+        modeloo.addElement("--- Lista de alumnos ---");
         for (Alumno alumno : this.listas) {
             modeloo.addElement(alumno);
         }
         JCBAlum.setModel(modeloo);
     }
 
-    public void llenarTabla(String query) {
+    public void llenarTabla() {
+        Alumno alu = (Alumno) JCBAlum.getSelectedItem();       
         modelo.setRowCount(0);
-        for (Alumno alumnos : this.listas) {
-            String dni = String.valueOf(alumnos.getDni());
-            if (query.equalsIgnoreCase((dni + " " + alumnos.getApellido() + " " + alumnos.getNombre()))) {
-                this.idalum = alumnos.getIdAlumno();
-                break;
-            }
-        }
+        this.idalum = alu.getIdAlumno();       
         listMat = insData.obtenerMateriasCursadas(idalum);
         for (Materia materia : listMat) {
             modelo.addRow(new Object[]{materia.getIdMateria(), (materia.getNombre() + " " + materia.getAnioMateria()), materia.getNota()});
         }
-
     }
 
     public void limpiaR() {

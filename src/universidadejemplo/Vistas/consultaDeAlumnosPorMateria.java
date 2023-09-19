@@ -12,16 +12,15 @@ import universidadejemplo.Entidades.Materia;
 
 public class consultaDeAlumnosPorMateria extends javax.swing.JInternalFrame {
 
-    private DefaultTableModel modelo = new DefaultTableModel();
+    DefaultTableModel modelo = new DefaultTableModel();
     MateriaData mData = new MateriaData();
-    InscripcionData aData = new InscripcionData();
+    InscripcionData insData = new InscripcionData();
     DefaultComboBoxModel model = new DefaultComboBoxModel();
-   
 
     public consultaDeAlumnosPorMateria() {
         initComponents();
+        modelo = (DefaultTableModel) this.JTMater.getModel();
         listarMateria();
-        listaalumno();
     }
 
     @SuppressWarnings("unchecked")
@@ -125,8 +124,9 @@ public class consultaDeAlumnosPorMateria extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JCmateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCmateActionPerformed
-        Object[] materiaSeleccionada = JCmate.getSelectedObjects();
-
+        if (JCmate.getSelectedIndex() != 0) {
+            llenarTabla();
+        }
     }//GEN-LAST:event_JCmateActionPerformed
 
     private void JBSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBSalirMouseClicked
@@ -149,23 +149,22 @@ public class consultaDeAlumnosPorMateria extends javax.swing.JInternalFrame {
 
     public void listarMateria() {
         List<Materia> lista = mData.listarMaterias();
-
+        model.addElement("--- Lista de materias ---");
         for (Materia materia : lista) {
             model.addElement(materia);
         }
         JCmate.setModel(model);
     }
-   public void listaalumno(){
-   List <Alumno> listaa= aData.obtenerAlumnoXMateria();
-   for(Alumno alumno : listaa ){
-      modelo.addRow(new Object[]{alumno.getIdAlumno(), ( alumno.getDni() + " " + alumno.getApellido()), alumno.getNombre()});
-   }
-  
-   }
 
+    public void llenarTabla() {
+        Materia mat = (Materia) JCmate.getSelectedItem();
+        modelo.setRowCount(0);
+        int idMat = mat.getIdMateria();
 
-    
-    
-    
-    
+        List<Alumno> lista = insData.obtenerAlumnoXMateria(idMat);
+        for (Alumno alumno : lista) {
+            modelo.addRow(new Object[]{alumno.getIdAlumno(), alumno.getDni(), alumno.getApellido(), alumno.getNombre()});
+        }
+    }
+
 }

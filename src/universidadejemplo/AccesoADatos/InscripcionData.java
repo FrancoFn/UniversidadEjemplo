@@ -36,9 +36,9 @@ public class InscripcionData {
         String sql = "Insert into inscripto(nota,idAlumno,idMateria) values (?,?,?) ";
         try {
             PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, ins.getAlumno().getIdAlumno());
-            ps.setInt(2, ins.getMateria().getIdMateria());
-            ps.setDouble(3, ins.getNota());
+            ps.setInt(2, ins.getAlumno().getIdAlumno());
+            ps.setInt(3, ins.getMateria().getIdMateria());
+            ps.setDouble(1, ins.getNota());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -185,10 +185,12 @@ public class InscripcionData {
 
     public List<Alumno> obtenerAlumnoXMateria(int idMateria) {
         ArrayList<Alumno> alumnosMateria = new ArrayList<>();
-        String sql = "Select a.idAlumno,dni,nombre,apellido,fechaNacimiento,estado"
-                + "from inscripto i, alumno a Where i.idAlumno = a.idAlumno and idMateria = ? and a.estado=1";
+        //Revisen mejor los SQL. O escribirlos desde 0.
+        String sql = "SELECT I.idAlumno,A.dni,A.nombre,A.apellido,A.fechaNacimiento,A.estado"
+                + " from alumno A join inscripto I  Where (I.idMateria = ?) and (I.idAlumno = A.idAlumno) and (A.estado=1)";
+       
         try {
-            PreparedStatement ps = con.prepareCall(sql);
+            PreparedStatement ps =  con.prepareStatement(sql);
             ps.setInt(1, idMateria);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
