@@ -5,6 +5,7 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import universidadejemplo.AccesoADatos.AlumnoData;
 import universidadejemplo.AccesoADatos.InscripcionData;
 import universidadejemplo.AccesoADatos.MateriaData;
 import universidadejemplo.Entidades.Alumno;
@@ -14,8 +15,10 @@ public class consultaDeAlumnosPorMateria extends javax.swing.JInternalFrame {
 
     DefaultTableModel modelo = new DefaultTableModel();
     MateriaData mData = new MateriaData();
-    InscripcionData insData = new InscripcionData();
+    AlumnoData aData = new AlumnoData();
+    InscripcionData insData = new InscripcionData(aData, mData);
     DefaultComboBoxModel model = new DefaultComboBoxModel();
+
 
     public consultaDeAlumnosPorMateria() {
         initComponents();

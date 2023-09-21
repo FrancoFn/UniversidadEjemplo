@@ -28,7 +28,7 @@ public class formularioDeInscripcion extends javax.swing.JInternalFrame {
 
     AlumnoData alumData = new AlumnoData();
     MateriaData matData = new MateriaData();
-    InscripcionData insData = new InscripcionData();
+    InscripcionData insData = new InscripcionData(alumData, matData);
     DefaultComboBoxModel modeloComboBox = new DefaultComboBoxModel();
     DefaultTableModel modeloTabla;
     List<Alumno> alum;
@@ -387,30 +387,21 @@ public void listarAlumno() {
 
     }
 
+    
+    
     public void anularInscripcion() {
-        int filas = modeloTabla.getRowCount();
+        int filasModelo = modeloTabla.getRowCount();
         Alumno alu = (Alumno) JCBAlum.getSelectedItem();
-        List<Inscripcion> inscripciones = insData.obtenerInscripciones();
-        Iterator<Inscripcion> it = inscripciones.iterator();
-        while (it.hasNext()) {
-            for (Inscripcion inscripcion : inscripciones) {
-
-            }
-        }
         List<Integer> idMaterias = new ArrayList<>();
-        for (int i = 0; i < modeloTabla.getRowCount(); i++) {
-
+        for (int i = 0; i < filasModelo; i++) {
             if ((Boolean) (modeloTabla.getValueAt(i, 3))) {
                 idMaterias.add((int) modeloTabla.getValueAt(i, 0));
-//                    int idmateria = (int) modeloTabla.getValueAt(i,0);
-//                    insData.borrarInscripcionMateriaAlumnos(alu.getIdAlumno(),idmateria );
             }
-            for (Integer idMateria : idMaterias) {
-                insData.borrarInscripcionMateriaAlumnos(alu.getIdAlumno(), idMateria);
-            }
-            
-            System.out.println("inscripcion anulada");
+        }
+        for (Integer idMateria : idMaterias) {
+            insData.borrarInscripcionMateriaAlumnos(alu.getIdAlumno(), idMateria);
             cargarTablaAlumno();
         }
-    }
+    
+  }
 }

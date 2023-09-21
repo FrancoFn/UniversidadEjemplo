@@ -6,6 +6,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import universidadejemplo.AccesoADatos.AlumnoData;
 import universidadejemplo.AccesoADatos.InscripcionData;
+import universidadejemplo.AccesoADatos.MateriaData;
 import universidadejemplo.Entidades.Alumno;
 import universidadejemplo.Entidades.Inscripcion;
 import universidadejemplo.Entidades.Materia;
@@ -14,7 +15,8 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
 
     Alumno alumno;
     AlumnoData adata = new AlumnoData();
-    InscripcionData insData = new InscripcionData();
+    MateriaData mData = new MateriaData();
+    InscripcionData insData = new InscripcionData(adata, mData);
     int idalum = 0;
     String nota = "";
     List<Alumno> listas;

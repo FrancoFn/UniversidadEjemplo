@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package universidadejemplo.AccesoADatos;
 
 import java.sql.Connection;
@@ -28,18 +24,19 @@ public class InscripcionData {
     AlumnoData aData;
     MateriaData mData;
 
-    public InscripcionData() {
+      public InscripcionData(AlumnoData aluData, MateriaData mateData) {
+        this.aData = aluData;
+        this.mData = mateData;
         con = Conexion.getConexion();
     }
 
-    public void guardarInscripcion(Inscripcion ins) {
+     public void guardarInscripcion(Inscripcion ins) {
         String sql = "Insert into inscripto(nota,idAlumno,idMateria) values (?,?,?) ";
         try {
             PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-            ps.setDouble(1, ins.getNota());
             ps.setInt(2, ins.getAlumno().getIdAlumno());
             ps.setInt(3, ins.getMateria().getIdMateria());
-
+            ps.setDouble(1, ins.getNota());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -189,9 +186,9 @@ public class InscripcionData {
         //Revisen mejor los SQL. O escribirlos desde 0.
         String sql = "SELECT I.idAlumno,A.dni,A.nombre,A.apellido,A.fechaNacimiento,A.estado"
                 + " from alumno A join inscripto I  Where (I.idMateria = ?) and (I.idAlumno = A.idAlumno) and (A.estado=1)";
-       
+
         try {
-            PreparedStatement ps =  con.prepareStatement(sql);
+            PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idMateria);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -210,9 +207,4 @@ public class InscripcionData {
         }
         return alumnosMateria;
     }
-
-    public List<Alumno> obtenerAlumnoXMateria() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-   
 }
