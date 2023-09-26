@@ -136,13 +136,14 @@ public class Ingreso extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Ingrese usuario");
         } else {
             String usuario = jtUsuario.getText();
-            String pass = jpPassword.getText();
+            String pass = new String(jpPassword.getPassword());
             Acceso acceso = aData.loG(usuario, pass);
-            nivel = acceso.getNivel();
-            if (acceso.isAcceso()) {
-                JOptionPane.showMessageDialog(null, "Acceso concedido");
-                this.dispose();
-
+            if (acceso != null) {
+                nivel = acceso.getNivel();
+                if (acceso.isAcceso()) {
+                    JOptionPane.showMessageDialog(null, "Acceso concedido");
+                    this.dispose();
+                }
             }
         }
     }
