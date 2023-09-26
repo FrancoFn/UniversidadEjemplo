@@ -18,7 +18,6 @@ public class consultaDeAlumnosPorMateria extends javax.swing.JInternalFrame {
     AlumnoData aData = new AlumnoData();
     InscripcionData insData = new InscripcionData(aData, mData);
     DefaultComboBoxModel model = new DefaultComboBoxModel();
-    public static consultaDeAlumnosPorMateria instancia;
 
     public consultaDeAlumnosPorMateria() {
         initComponents();
@@ -137,7 +136,7 @@ public class consultaDeAlumnosPorMateria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_JBSalirMouseClicked
 
     private void JBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBSalirActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_JBSalirActionPerformed
 
 
@@ -168,11 +167,5 @@ public class consultaDeAlumnosPorMateria extends javax.swing.JInternalFrame {
         for (Alumno alumno : lista) {
             modelo.addRow(new Object[]{alumno.getIdAlumno(), alumno.getDni(), alumno.getApellido(), alumno.getNombre()});
         }
-    }
- public static consultaDeAlumnosPorMateria getInstancia(){
-        if(instancia==null){
-            instancia=new consultaDeAlumnosPorMateria();
-        }
-        return instancia;
     }
 }

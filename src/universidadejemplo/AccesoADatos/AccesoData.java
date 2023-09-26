@@ -24,12 +24,7 @@ public class AccesoData {
     public AccesoData() {
         con = Conexion.getConexion();
     }
-    
-    
-    
-    
-    
-    
+
     public void activaR(){
         
     }

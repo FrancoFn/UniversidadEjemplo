@@ -1,19 +1,16 @@
 package universidadejemplo.Vistas;
 
 import javax.swing.JOptionPane;
-import universidadejemplo.AccesoADatos.AperturaMultiple;
 import universidadejemplo.Entidades.Acceso;
 
 public class MenuPrincipal extends javax.swing.JFrame {
 
-    AperturaMultiple evDuplicado;
     Acceso acceso = new Acceso();
     Ingreso ingreso = new Ingreso();
     public int level;
 
     public MenuPrincipal() {
         initComponents();
-        this.evDuplicado = new AperturaMultiple(escritorio);
         logiN();
         
     }
@@ -248,26 +245,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmAporMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmAporMateriaActionPerformed
-        evDuplicado.abrirInternal(consultaDeAlumnosPorMateria.getInstancia());
-        /*
         escritorio.removeAll();
         escritorio.repaint();
         consultaDeAlumnosPorMateria alumpormate = new consultaDeAlumnosPorMateria();
         alumpormate.setVisible(true);
         escritorio.add(alumpormate);
-        escritorio.moveToFront(alumpormate);*/
+        escritorio.moveToFront(alumpormate);
     }//GEN-LAST:event_jmAporMateriaActionPerformed
 
     private void jmFomAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmFomAlumnoActionPerformed
 
         if (ingreso.getNivel() != 1) {
-            evDuplicado.abrirInternal(GestionDeAlumnos.getInstancia());
-            /*escritorio.removeAll();
+            escritorio.removeAll();
             escritorio.repaint();
             GestionDeAlumnos gesAlumnos = new GestionDeAlumnos();
             gesAlumnos.setVisible(true);
             escritorio.add(gesAlumnos);
-            escritorio.moveToFront(gesAlumnos);*/
+            escritorio.moveToFront(gesAlumnos);
         } else {
             JOptionPane.showMessageDialog(null, "Acceso restringido");
         }
@@ -276,13 +270,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jmInscripcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmInscripcionesActionPerformed
         if (ingreso.getNivel() == 3) {
-          evDuplicado.abrirInternal(formularioDeInscripcion.getInstancia());
-            /* escritorio.removeAll();
+             escritorio.removeAll();
             escritorio.repaint();
             formularioDeInscripcion forinscripcion = new formularioDeInscripcion();
             forinscripcion.setVisible(true);
             escritorio.add(forinscripcion);
-            escritorio.moveToFront(forinscripcion);*/
+            escritorio.moveToFront(forinscripcion);
         } else {
             JOptionPane.showMessageDialog(null, "Acceso restringido");
         }
@@ -290,13 +283,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jmFormMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmFormMateriaActionPerformed
         if (ingreso.getNivel() != 1) {
-           evDuplicado.abrirInternal(GestionDeMaterias.getInstancia());
-            /*escritorio.removeAll();
+            escritorio.removeAll();
             escritorio.repaint();
             GestionDeMaterias gestionMateria = new GestionDeMaterias();
             gestionMateria.setVisible(true);
             escritorio.add(gestionMateria);
-            escritorio.moveToFront(jMenu1);*/
+            escritorio.moveToFront(jMenu1);
         } else {
             JOptionPane.showMessageDialog(null, "Acceso restringido");
         }
@@ -304,13 +296,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jmNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmNotasActionPerformed
         if (ingreso.getNivel() == 3) {
-            evDuplicado.abrirInternal(ManipulacionDeNotas.getInstancia());
-            /*escritorio.removeAll();
+            escritorio.removeAll();
             escritorio.repaint();
             ManipulacionDeNotas mNotas = new ManipulacionDeNotas();
             mNotas.setVisible(true);
             escritorio.add(mNotas);
-            escritorio.moveToFront(mNotas);*/
+            escritorio.moveToFront(mNotas);
         } else {
             JOptionPane.showMessageDialog(null, "Acceso restringido");
         }
@@ -378,8 +369,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private java.awt.Panel panel3;
     // End of variables declaration//GEN-END:variables
 public void logiN() {
-       // evDuplicado.abrirInternal(Ingreso.getInstancia());
-    
         escritorio.removeAll();
         escritorio.repaint();
         ingreso.setVisible(true);

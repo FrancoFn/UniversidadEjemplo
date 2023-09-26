@@ -146,12 +146,5 @@ public class Ingreso extends javax.swing.JInternalFrame {
             }
         }
     }
-     public static Ingreso getInstancia(){
-        if(instancia==null){
-            instancia=new Ingreso();
-            
-        }
-        return instancia;
-    }
 
 }

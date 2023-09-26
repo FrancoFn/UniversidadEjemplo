@@ -25,7 +25,6 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     String fechaString;
     Date fecha;
     Alumno alumno;
-    public static GestionDeAlumnos instancia;
     
     public GestionDeAlumnos() {
         initComponents();
@@ -211,9 +210,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jrActivo)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jdFN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jdFN, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,7 +252,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(jdFN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbNuevo)
                     .addComponent(jbEliminar)
@@ -400,11 +397,5 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         Alumno alumno = new Alumno(Integer.parseInt(jtDoc.getText()), jtApe.getText(),
                 jtNom.getText(), fecha, jrActivo.isSelected());
         adata.guardarAlumnoX(alumno);
-    }
-     public static GestionDeAlumnos getInstancia(){
-        if(instancia==null){
-            instancia=new GestionDeAlumnos();
-        }
-        return instancia;
     }
 }

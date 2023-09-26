@@ -23,7 +23,6 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
     List<Materia> listMat;
     DefaultComboBoxModel modeloo = new DefaultComboBoxModel();
     DefaultTableModel modelo = new DefaultTableModel();
-    public static ManipulacionDeNotas instancia;
 
     public ManipulacionDeNotas() {
         initComponents();
@@ -257,11 +256,5 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
         jlCodigo.setText("**********");
         jlNombre.setText("**********");
         jtNota.setText("");
-    }
-      public static ManipulacionDeNotas getInstancia(){
-        if(instancia==null){
-            instancia=new ManipulacionDeNotas();
-        }
-        return instancia;
     }
 }

@@ -16,7 +16,6 @@ import universidadejemplo.Entidades.Materia;
 public class GestionDeMaterias extends javax.swing.JInternalFrame {
 
     private MateriaData materiaData;
-    public static GestionDeMaterias instancia;
     /**
      * Creates new form NewJInternalFrame
      */
@@ -309,11 +308,5 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
         jTextFieldAnio.setText("");
         jRadioButton1.setSelected(false);
         jTextFieldCodigo.setText("");
-    }
-      public static GestionDeMaterias getInstancia(){
-        if(instancia==null){
-            instancia=new GestionDeMaterias();
-        }
-        return instancia;
     }
 }
