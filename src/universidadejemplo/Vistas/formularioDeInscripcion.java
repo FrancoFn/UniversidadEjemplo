@@ -32,6 +32,7 @@ public class formularioDeInscripcion extends javax.swing.JInternalFrame {
     DefaultComboBoxModel modeloComboBox = new DefaultComboBoxModel();
     DefaultTableModel modeloTabla;
     List<Alumno> alum;
+    public static formularioDeInscripcion instancia;
 
     public formularioDeInscripcion() {
         initComponents();
@@ -384,7 +385,6 @@ public void listarAlumno() {
             }
         }
         cargarTablaAlumno();
-
     }
 
     
@@ -404,4 +404,11 @@ public void listarAlumno() {
         }
     
   }
+    public static formularioDeInscripcion getInstancia(){
+        if(instancia==null){
+            instancia=new formularioDeInscripcion();
+        }
+        return instancia;
+    }
+    
 }

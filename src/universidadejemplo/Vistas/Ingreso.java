@@ -15,7 +15,7 @@ import universidadejemplo.Entidades.Acceso;
  */
 public class Ingreso extends javax.swing.JInternalFrame {
 
-    // Acceso acceso = new Acceso();
+    public static Ingreso instancia;
     AccesoData aData = new AccesoData();
     int nivel = 0;
 
@@ -145,6 +145,13 @@ public class Ingreso extends javax.swing.JInternalFrame {
 
             }
         }
+    }
+     public static Ingreso getInstancia(){
+        if(instancia==null){
+            instancia=new Ingreso();
+            
+        }
+        return instancia;
     }
 
 }

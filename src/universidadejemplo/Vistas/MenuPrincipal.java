@@ -1,18 +1,21 @@
 package universidadejemplo.Vistas;
 
 import javax.swing.JOptionPane;
+import universidadejemplo.AccesoADatos.AperturaMultiple;
 import universidadejemplo.Entidades.Acceso;
 
 public class MenuPrincipal extends javax.swing.JFrame {
 
+    AperturaMultiple evDuplicado;
     Acceso acceso = new Acceso();
     Ingreso ingreso = new Ingreso();
     public int level;
 
     public MenuPrincipal() {
         initComponents();
+        this.evDuplicado = new AperturaMultiple(escritorio);
         logiN();
-
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -147,22 +150,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        escritorio.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
+            .addGap(0, 1030, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 580, Short.MAX_VALUE)
+            .addGap(0, 672, Short.MAX_VALUE)
         );
-
-        getContentPane().add(escritorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 580));
 
         jMenu1.setText("Alumno");
 
@@ -223,33 +221,53 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuSalir.setText("Salir");
 
         jmSalir.setText("Salir");
+        jmSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmSalirActionPerformed(evt);
+            }
+        });
         jMenuSalir.add(jmSalir);
 
         jMenuBar1.add(jMenuSalir);
 
         setJMenuBar(jMenuBar1);
 
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(escritorio)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(escritorio)
+        );
+
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmAporMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmAporMateriaActionPerformed
+        evDuplicado.abrirInternal(consultaDeAlumnosPorMateria.getInstancia());
+        /*
         escritorio.removeAll();
         escritorio.repaint();
         consultaDeAlumnosPorMateria alumpormate = new consultaDeAlumnosPorMateria();
         alumpormate.setVisible(true);
         escritorio.add(alumpormate);
-        escritorio.moveToFront(alumpormate);
+        escritorio.moveToFront(alumpormate);*/
     }//GEN-LAST:event_jmAporMateriaActionPerformed
 
     private void jmFomAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmFomAlumnoActionPerformed
 
         if (ingreso.getNivel() != 1) {
-            escritorio.removeAll();
+            evDuplicado.abrirInternal(GestionDeAlumnos.getInstancia());
+            /*escritorio.removeAll();
             escritorio.repaint();
             GestionDeAlumnos gesAlumnos = new GestionDeAlumnos();
             gesAlumnos.setVisible(true);
             escritorio.add(gesAlumnos);
-            escritorio.moveToFront(gesAlumnos);
+            escritorio.moveToFront(gesAlumnos);*/
         } else {
             JOptionPane.showMessageDialog(null, "Acceso restringido");
         }
@@ -258,12 +276,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jmInscripcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmInscripcionesActionPerformed
         if (ingreso.getNivel() == 3) {
-            escritorio.removeAll();
+          evDuplicado.abrirInternal(formularioDeInscripcion.getInstancia());
+            /* escritorio.removeAll();
             escritorio.repaint();
             formularioDeInscripcion forinscripcion = new formularioDeInscripcion();
             forinscripcion.setVisible(true);
             escritorio.add(forinscripcion);
-            escritorio.moveToFront(forinscripcion);
+            escritorio.moveToFront(forinscripcion);*/
         } else {
             JOptionPane.showMessageDialog(null, "Acceso restringido");
         }
@@ -271,12 +290,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jmFormMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmFormMateriaActionPerformed
         if (ingreso.getNivel() != 1) {
-            escritorio.removeAll();
+           evDuplicado.abrirInternal(GestionDeMaterias.getInstancia());
+            /*escritorio.removeAll();
             escritorio.repaint();
             GestionDeMaterias gestionMateria = new GestionDeMaterias();
             gestionMateria.setVisible(true);
             escritorio.add(gestionMateria);
-            escritorio.moveToFront(jMenu1);
+            escritorio.moveToFront(jMenu1);*/
         } else {
             JOptionPane.showMessageDialog(null, "Acceso restringido");
         }
@@ -284,16 +304,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jmNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmNotasActionPerformed
         if (ingreso.getNivel() == 3) {
-            escritorio.removeAll();
+            evDuplicado.abrirInternal(ManipulacionDeNotas.getInstancia());
+            /*escritorio.removeAll();
             escritorio.repaint();
             ManipulacionDeNotas mNotas = new ManipulacionDeNotas();
             mNotas.setVisible(true);
             escritorio.add(mNotas);
-            escritorio.moveToFront(mNotas);
+            escritorio.moveToFront(mNotas);*/
         } else {
             JOptionPane.showMessageDialog(null, "Acceso restringido");
         }
     }//GEN-LAST:event_jmNotasActionPerformed
+
+    private void jmSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jmSalirActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -353,11 +378,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private java.awt.Panel panel3;
     // End of variables declaration//GEN-END:variables
 public void logiN() {
+       // evDuplicado.abrirInternal(Ingreso.getInstancia());
+    
         escritorio.removeAll();
         escritorio.repaint();
         ingreso.setVisible(true);
+        ingreso.setLocation(375, 200);
         escritorio.add(ingreso);
         escritorio.moveToFront(ingreso);
+        
     }
 
 }

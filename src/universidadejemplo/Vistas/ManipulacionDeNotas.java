@@ -23,6 +23,7 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
     List<Materia> listMat;
     DefaultComboBoxModel modeloo = new DefaultComboBoxModel();
     DefaultTableModel modelo = new DefaultTableModel();
+    public static ManipulacionDeNotas instancia;
 
     public ManipulacionDeNotas() {
         initComponents();
@@ -50,6 +51,9 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
         jlNombre = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 153, 102));
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Carga de notas");
@@ -89,6 +93,11 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
         });
 
         jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         jlCod.setText("Codigo");
 
@@ -200,7 +209,12 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
         }
         insData.actualizarNota(idalum, idMateria, Nnota);
         limpiaR();
+        llenarTabla();
     }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -243,5 +257,11 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
         jlCodigo.setText("**********");
         jlNombre.setText("**********");
         jtNota.setText("");
+    }
+      public static ManipulacionDeNotas getInstancia(){
+        if(instancia==null){
+            instancia=new ManipulacionDeNotas();
+        }
+        return instancia;
     }
 }

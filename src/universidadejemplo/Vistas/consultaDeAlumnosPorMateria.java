@@ -18,7 +18,7 @@ public class consultaDeAlumnosPorMateria extends javax.swing.JInternalFrame {
     AlumnoData aData = new AlumnoData();
     InscripcionData insData = new InscripcionData(aData, mData);
     DefaultComboBoxModel model = new DefaultComboBoxModel();
-
+    public static consultaDeAlumnosPorMateria instancia;
 
     public consultaDeAlumnosPorMateria() {
         initComponents();
@@ -169,5 +169,10 @@ public class consultaDeAlumnosPorMateria extends javax.swing.JInternalFrame {
             modelo.addRow(new Object[]{alumno.getIdAlumno(), alumno.getDni(), alumno.getApellido(), alumno.getNombre()});
         }
     }
-
+ public static consultaDeAlumnosPorMateria getInstancia(){
+        if(instancia==null){
+            instancia=new consultaDeAlumnosPorMateria();
+        }
+        return instancia;
+    }
 }

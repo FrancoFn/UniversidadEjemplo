@@ -25,7 +25,8 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     String fechaString;
     Date fecha;
     Alumno alumno;
-
+    public static GestionDeAlumnos instancia;
+    
     public GestionDeAlumnos() {
         initComponents();
 
@@ -53,6 +54,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
+        jDayChooser1 = new com.toedter.calendar.JDayChooser();
         JLAlumno = new javax.swing.JLabel();
         JLDocumento = new javax.swing.JLabel();
         jtDoc = new javax.swing.JTextField();
@@ -176,6 +178,11 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         });
 
         jButton4.setText("Salir");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -310,6 +317,10 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         buscarAlumnoDni();
     }//GEN-LAST:event_JBBuscarActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBBuscar;
@@ -319,6 +330,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
+    private com.toedter.calendar.JDayChooser jDayChooser1;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -388,5 +400,11 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         Alumno alumno = new Alumno(Integer.parseInt(jtDoc.getText()), jtApe.getText(),
                 jtNom.getText(), fecha, jrActivo.isSelected());
         adata.guardarAlumnoX(alumno);
+    }
+     public static GestionDeAlumnos getInstancia(){
+        if(instancia==null){
+            instancia=new GestionDeAlumnos();
+        }
+        return instancia;
     }
 }
