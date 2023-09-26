@@ -232,11 +232,15 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextFieldCodigoActionPerformed
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
+        if (jTextFieldCodigo.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Ingrese un Codigo");
+        }else{
         int id = Integer.parseInt(jTextFieldCodigo.getText());
         Materia materiaObtenida = materiaData.buscarMateria(id);
         jTextFieldNombre.setText(materiaObtenida.getNombre());
         jTextFieldAnio.setText(materiaObtenida.getAnioMateria() + "");
         jRadioButton1.setSelected(materiaObtenida.isActivo());
+        }
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 
     private void jTextFieldNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNombreKeyTyped

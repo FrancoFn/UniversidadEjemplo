@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import universidadejemplo.AccesoADatos.AlumnoData;
 import universidadejemplo.Entidades.Alumno;
@@ -311,7 +312,11 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void JBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBBuscarActionPerformed
-        buscarAlumnoDni();
+        if (jtDoc.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Ingrese el DNI");
+        }else{
+         buscarAlumnoDni();
+        }
     }//GEN-LAST:event_JBBuscarActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -362,6 +367,8 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         DateTimeFormatter format = new DateTimeFormatterBuilder().append(DateTimeFormatter.ofPattern("dd-MMM-yyyy")).toFormatter();
         SimpleDateFormat formate = new SimpleDateFormat("dd-MMM-yyyy");
         alumno = adata.buscarAlumnoPorDni(dni);
+        
+        
         if (alumno != null) {
             fechaString = alumno.getFechaNac().format(format);
             try {
