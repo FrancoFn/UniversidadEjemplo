@@ -175,7 +175,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel5.setText("FechaDeNacimiento:");
 
-        jbNuevo.setText("Nuevo");
+        jbNuevo.setText("Limpiar");
         jbNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbNuevoActionPerformed(evt);
@@ -378,7 +378,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
             jrActivo.setSelected(false);
             JBBuscar.setEnabled(true);
         }
-        if (jtDoc.getText().length() == 8) {
+        if (jtDoc.getText().length() >=7) {
             if (radioButtonBuscar.isSelected()) {
                 JBBuscar.setEnabled(true);
             }
