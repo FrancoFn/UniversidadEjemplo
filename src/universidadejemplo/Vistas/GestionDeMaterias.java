@@ -16,12 +16,15 @@ import universidadejemplo.Entidades.Materia;
 public class GestionDeMaterias extends javax.swing.JInternalFrame {
 
     private MateriaData materiaData;
+    private Materia materia;
+
     /**
      * Creates new form NewJInternalFrame
      */
     public GestionDeMaterias() {
         initComponents();
         materiaData = new MateriaData();
+        cargarComboBox();
 
     }
 
@@ -49,6 +52,9 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
         jTextFieldCodigo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        radioButtonCrear = new javax.swing.JRadioButton();
+        radioButtonBuscar = new javax.swing.JRadioButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(0, 204, 153));
         setClosable(true);
@@ -63,6 +69,7 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
         });
 
         jButtonGuardar.setText("Guardar");
+        jButtonGuardar.setEnabled(false);
         jButtonGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonGuardarActionPerformed(evt);
@@ -70,6 +77,7 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
         });
 
         jButtonEliminar.setText("Eliminar");
+        jButtonEliminar.setEnabled(false);
         jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonEliminarActionPerformed(evt);
@@ -95,12 +103,18 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
         jLabel4.setText("Año");
 
         jTextFieldAnio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldAnioKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextFieldAnioKeyTyped(evt);
             }
         });
 
         jTextFieldNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldNombreKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextFieldNombreKeyTyped(evt);
             }
@@ -126,6 +140,9 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
             }
         });
         jTextFieldCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldCodigoKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextFieldCodigoKeyTyped(evt);
             }
@@ -139,82 +156,116 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Materia");
 
+        buttonGroup1.add(radioButtonCrear);
+        radioButtonCrear.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        radioButtonCrear.setText("CREAR");
+        radioButtonCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioButtonCrearActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(radioButtonBuscar);
+        radioButtonBuscar.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        radioButtonBuscar.setText("BUSCAR / ELIMINAR");
+        radioButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioButtonBuscarActionPerformed(evt);
+            }
+        });
+
+        jComboBox1.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setEnabled(false);
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(1, 1, 1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(radioButtonCrear)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(radioButtonBuscar))
+                            .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jTextFieldAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRadioButton1)
+                                .addGap(2, 2, 2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addComponent(jTextFieldAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addComponent(jRadioButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
+                        .addGap(50, 50, 50)
                         .addComponent(jButtonNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(14, 14, 14)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(jLabel3))
-                    .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(radioButtonBuscar)
+                    .addComponent(radioButtonCrear))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jRadioButton1)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel3))
+                            .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(jRadioButton1)))))
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGap(34, 34, 34))
         );
 
         pack();
@@ -224,6 +275,16 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
         char letra = evt.getKeyChar();
         if (letra < '0' || letra > '9') {
             evt.consume();
+        } else {
+            jComboBox1.setSelectedIndex(0);
+            jTextFieldAnio.setText("");
+            jTextFieldNombre.setText("");
+            jButtonBuscar.setEnabled(true);
+        }
+        if (!jTextFieldCodigo.getText().isEmpty()) {
+            //jButtonBuscar.setEnabled(true);
+        } else {
+            jButtonEliminar.setEnabled(false);
         }
     }//GEN-LAST:event_jTextFieldCodigoKeyTyped
 
@@ -232,15 +293,11 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextFieldCodigoActionPerformed
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
-        if (jTextFieldCodigo.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Ingrese un Codigo");
-        }else{
-        int id = Integer.parseInt(jTextFieldCodigo.getText());
-        Materia materiaObtenida = materiaData.buscarMateria(id);
-        jTextFieldNombre.setText(materiaObtenida.getNombre());
-        jTextFieldAnio.setText(materiaObtenida.getAnioMateria() + "");
-        jRadioButton1.setSelected(materiaObtenida.isActivo());
-        }
+ obtenerMateria();
+ jTextFieldAnio.setEnabled(true);
+ jTextFieldNombre.setEnabled(true);
+ jRadioButton1.setEnabled(true);
+
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 
     private void jTextFieldNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNombreKeyTyped
@@ -259,19 +316,21 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextFieldAnioKeyTyped
 
     private void jButtonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevoActionPerformed
-        limpiarCampos();
+        limpiar();
+        cargarComboBox();
     }//GEN-LAST:event_jButtonNuevoActionPerformed
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
         int id = Integer.parseInt(jTextFieldCodigo.getText());
         materiaData.eliminarMateria(id);
+        cargarComboBox();
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
-        if(jTextFieldAnio.getText().equals("")||
-            jTextFieldNombre.getText().equals("")){
-            JOptionPane.showInternalMessageDialog(this,"Complete los campos vacíos","Error", 0);
-        }else{
+        if (jTextFieldAnio.getText().equals("")
+                || jTextFieldNombre.getText().equals("")) {
+            JOptionPane.showInternalMessageDialog(this, "Complete los campos vacíos", "Error", 0);
+        } else {
             Materia materiaNueva = new Materia();
             materiaNueva.setNombre(jTextFieldNombre.getText());
             if (!jTextFieldCodigo.getText().equals("")) {
@@ -281,13 +340,64 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
             materiaNueva.setAnioMateria(Integer.parseInt(jTextFieldAnio.getText()));
             materiaNueva.setActivo(jRadioButton1.isSelected());
             materiaData.guardarMateria(materiaNueva);
-            limpiarCampos();
+            limpiar();
+            cargarComboBox();
     }//GEN-LAST:event_jButtonGuardarActionPerformed
     }
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButtonSalirActionPerformed
-    
+
+    private void radioButtonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioButtonCrearActionPerformed
+        limpiar();
+        jComboBox1.setEnabled(false);
+        jTextFieldCodigo.setEnabled(false);
+        jTextFieldCodigo.setEditable(false);
+        jTextFieldNombre.setEnabled(true);
+        jTextFieldNombre.setEditable(true);
+        jTextFieldAnio.setEnabled(true);
+        jTextFieldAnio.setEditable(true);
+        jButtonBuscar.setEnabled(false);
+        jRadioButton1.setEnabled(true);
+    }//GEN-LAST:event_radioButtonCrearActionPerformed
+
+    private void radioButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioButtonBuscarActionPerformed
+        limpiar();
+        jComboBox1.setEnabled(true);
+        jTextFieldCodigo.setEnabled(true);
+        jTextFieldCodigo.setEditable(true);
+        jTextFieldNombre.setEnabled(false);
+        jTextFieldNombre.setEditable(false);
+        jTextFieldAnio.setEnabled(false);
+        jTextFieldAnio.setEditable(false);
+        jRadioButton1.setEnabled(false);
+        jButtonBuscar.setEnabled(true);
+        jRadioButton1.setEnabled(false);
+
+    }//GEN-LAST:event_radioButtonBuscarActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        if (jComboBox1.getSelectedIndex() != 0) {
+            materia = (Materia) jComboBox1.getSelectedItem();
+            jButtonBuscar.setEnabled(true);
+            jTextFieldCodigo.setText("");
+        } else {
+            jButtonBuscar.setEnabled(false);
+        }
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jTextFieldCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCodigoKeyReleased
+        activarBotonGuardar();
+    }//GEN-LAST:event_jTextFieldCodigoKeyReleased
+
+    private void jTextFieldNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNombreKeyReleased
+        activarBotonGuardar();
+    }//GEN-LAST:event_jTextFieldNombreKeyReleased
+
+    private void jTextFieldAnioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldAnioKeyReleased
+        activarBotonGuardar();
+    }//GEN-LAST:event_jTextFieldAnioKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -296,6 +406,7 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButtonGuardar;
     private javax.swing.JButton jButtonNuevo;
     private javax.swing.JButton jButtonSalir;
+    private javax.swing.JComboBox<Object> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -305,12 +416,58 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextFieldAnio;
     private javax.swing.JTextField jTextFieldCodigo;
     private javax.swing.JTextField jTextFieldNombre;
+    private javax.swing.JRadioButton radioButtonBuscar;
+    private javax.swing.JRadioButton radioButtonCrear;
     // End of variables declaration//GEN-END:variables
 
-    private void limpiarCampos() {
+    private void limpiar() {
         jTextFieldNombre.setText("");
         jTextFieldAnio.setText("");
         jRadioButton1.setSelected(false);
         jTextFieldCodigo.setText("");
+
+        jComboBox1.setSelectedIndex(0);
+        radioButtonBuscar.setSelected(false);
+        radioButtonCrear.setSelected(false);
+        jButtonEliminar.setEnabled(false);
+        jButtonGuardar.setEnabled(false);
     }
+
+    private void cargarComboBox() {
+
+        jComboBox1.removeAllItems();
+        jComboBox1.addItem("--Seleccione una Materia--");
+        for (Object alu : materiaData.listarMaterias()) {
+            jComboBox1.addItem(alu);
+
+        }
+    }
+
+    private void obtenerMateria() {
+        if (jComboBox1.getSelectedIndex() != 0) {
+            materia = (Materia) jComboBox1.getSelectedItem();
+        } else {
+            materia = materiaData.buscarMateria(Integer.parseInt(jTextFieldCodigo.getText()));
+        }
+        if (materia != null) {
+            jTextFieldAnio.setText(materia.getAnioMateria() + "");
+            jTextFieldNombre.setText(materia.getNombre());
+            jTextFieldCodigo.setText(materia.getIdMateria() + "");
+            jRadioButton1.setSelected(materia.isActivo());
+            jButtonEliminar.setEnabled(true);
+        }
+    }
+
+    private void activarBotonGuardar() {
+        if (radioButtonCrear.isSelected()) {
+            if (!jTextFieldNombre.getText().isEmpty()
+                    && !jTextFieldAnio.getText().isEmpty()) {
+                jButtonGuardar.setEnabled(true);
+                jRadioButton1.setSelected(true);
+            } else {
+                jButtonGuardar.setEnabled(false);
+            }
+        }
+    }
+
 }
